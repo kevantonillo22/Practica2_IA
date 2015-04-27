@@ -69,6 +69,13 @@ public class mainFrame extends javax.swing.JFrame {
 
         jLabel5.setText("Número de individuos para mutación");
 
+        jTextField1.setText("10");
+        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField1KeyTyped(evt);
+            }
+        });
+
         jButton1.setText("jButton1");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -79,6 +86,13 @@ public class mainFrame extends javax.swing.JFrame {
         jComboBox4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tipo1", "Tipo2" }));
 
         jLabel8.setText("Criterio de finalización");
+
+        jTextField3.setText("10");
+        jTextField3.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField3KeyTyped(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -135,6 +149,7 @@ public class mainFrame extends javax.swing.JFrame {
 
         jLabel6.setText("Frase");
 
+        jTextField2.setText("hola mundo");
         jTextField2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField2ActionPerformed(evt);
@@ -190,13 +205,51 @@ public class mainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        Genetico algoritmo = new Genetico();
-        algoritmo.generarPoblacionLetras(10, 5);
+        String codificacion = jComboBox1.getSelectedItem() + "";
+        int tamPoblacion = Integer.parseInt(jTextField3.getText());
+        String seleccionPadres = jComboBox2.getSelectedItem() + "";
+        String cruce = jComboBox3.getSelectedItem() + "";
+        int tamIndividuo = jTextField2.getText().trim().length();
+        String frase = jTextField2.getText().trim();
+        int numMutacion = Integer.parseInt(jTextField1.getText());
+        String criterioFinalizacion = jComboBox4.getSelectedItem() + "";
+        
+        Genetico algoritmo = new Genetico(tamPoblacion, tamIndividuo, frase);
+        algoritmo.generarPoblacionLetras();
         algoritmo.Emparejar();
-        algoritmo.mostrarPoblacion();
-        //Random rand = new Random();
-        //System.out.println(rand.nextInt(95) + 32);
+        
+        String val = algoritmo.mostrarPoblacion();
+        jTextArea1.setText(jTextArea1.getText() + val);
+        algoritmo.seleccionTipo1();
+        
+        val = algoritmo.mostrarPoblacion();
+        jTextArea1.setText(jTextArea1.getText() + val);
+        
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jTextField3KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField3KeyTyped
+        char caracter = evt.getKeyChar();
+
+        // Verificar si la tecla pulsada no es un digito
+        if(((caracter < '0') ||
+           (caracter > '9')) &&
+           (caracter != '\b' /*corresponde a BACK_SPACE*/))
+        {
+           evt.consume();  // ignorar el evento de teclado
+        }
+    }//GEN-LAST:event_jTextField3KeyTyped
+
+    private void jTextField1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyTyped
+        char caracter = evt.getKeyChar();
+
+        // Verificar si la tecla pulsada no es un digito
+        if(((caracter < '0') ||
+           (caracter > '9')) &&
+           (caracter != '\b' /*corresponde a BACK_SPACE*/))
+        {
+           evt.consume();  // ignorar el evento de teclado
+        }
+    }//GEN-LAST:event_jTextField1KeyTyped
 
     /**
      * @param args the command line arguments

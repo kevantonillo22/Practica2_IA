@@ -32,14 +32,18 @@ public class Genetico {
     
     public int tamPoblacion;
     public int tamIndividuo;
-    
-    public void generarPoblacionAlfaNumerico(int tamPoblacion, int tamIndividuo)
+    public String frase;
+
+    Genetico(int tamPoblacion, int tamIndividuo, String frase) 
     {
         poblacion = new Individuo[tamPoblacion];
         this.tamPoblacion = tamPoblacion;
         this.tamIndividuo = tamIndividuo;
-        
-        
+        this.frase = frase;
+    }
+    
+    public void generarPoblacionAlfaNumerico()
+    {
         for (int i = 0; i <= tamPoblacion - 1; i++) 
         {
             //genero un individuo random
@@ -56,12 +60,9 @@ public class Genetico {
         }
     }
     
-    public void generarPoblacionLetras(int tamPoblacion, int tamIndividuo)
+    public void generarPoblacionLetras()
     {
         poblacion = new Individuo[tamPoblacion];
-        this.tamPoblacion = tamPoblacion;
-        this.tamIndividuo = tamIndividuo;
-        
         
         for (int i = 0; i <= tamPoblacion - 1; i++) 
         {
@@ -79,9 +80,117 @@ public class Genetico {
         }
     }
     
+    //saco el valor cada elemento del individuo y cada
+    //uno de esos valores lo resto con la posicion correspondiente de la frase
+    //para luego todos los resultados de las restas sumarlo y comparar ambos padres
     public void seleccionTipo1()
     {
+        //Emparejar();
         
+        ArrayList<Integer> lista = new ArrayList();
+        //Lleno mi lista con las posiciones
+        for (int i = 0; i <= tamPoblacion - 1; i++) 
+        {
+            lista.add(i);   
+        }
+        
+        while (!lista.isEmpty()) 
+        {
+            int valTotalPadre = 0;
+            int valTotalMadre = 0;
+            int i = lista.get(0);
+            
+            for (int j = 0; j <= tamIndividuo - 1; j++) 
+            {
+                int valPadre;
+                int valMadre;
+                int valFrase;
+                
+                valPadre = (int)poblacion[i].cadena.charAt(j);
+                int posPareja = poblacion[i].parejaSeleccion - 1;
+                valMadre = (int)poblacion[posPareja].cadena.charAt(j);
+                valFrase = frase.charAt(j);
+                
+                valTotalPadre = valTotalPadre + Math.abs(valPadre - valFrase);
+                valTotalMadre = valTotalMadre + Math.abs(valMadre - valFrase);
+            }
+            
+            //si el padre es mas parecido me quedo con el padre en ambos
+            //y sustituyo a la pareja por el padre
+            if(valTotalPadre < valTotalMadre)
+            {
+                int posPareja = poblacion[i].parejaSeleccion - 1;
+                poblacion[posPareja].cadena = poblacion[i].cadena;
+                boolean t = lista.remove((Integer)posPareja);
+                boolean t2 = lista.remove((Integer)i);
+            }
+            else
+            {
+                int posPareja = poblacion[i].parejaSeleccion - 1;
+                poblacion[i].cadena = poblacion[posPareja].cadena;
+                boolean t = lista.remove((Integer)posPareja);
+                boolean t2 = lista.remove((Integer)i);
+            }
+        }
+    }
+    
+    //sumo todos los valores del individuo y la suma resultante
+    //la resto con el valor total de la frase 
+    public void SeleccionTipo2()
+    {
+        //Emparejar();
+        
+        ArrayList<Integer> lista = new ArrayList();
+        //Lleno mi lista con las posiciones
+        for (int i = 0; i <= tamPoblacion - 1; i++) 
+        {
+            lista.add(i);   
+        }
+        
+        while (!lista.isEmpty()) 
+        {
+            int valTotalPadre = 0;
+            int valTotalMadre = 0;
+            int valTotalFrase = 0;
+            int i = lista.get(0);
+            
+            for (int j = 0; j <= tamIndividuo - 1; j++) 
+            {
+                int valPadre;
+                int valMadre;
+                int valFrase;
+                
+                valPadre = (int)poblacion[i].cadena.charAt(j);
+                int posPareja = poblacion[i].parejaSeleccion - 1;
+                valMadre = (int)poblacion[posPareja].cadena.charAt(j);
+                valFrase = frase.charAt(j);
+                
+                valTotalPadre = valTotalPadre + valPadre;
+                valTotalMadre = valTotalMadre + valMadre;
+                valTotalFrase = valTotalMadre + valFrase;
+                
+            }
+            
+            int totPadre = Math.abs(valTotalPadre - valTotalFrase);
+            int totMadre = Math.abs(valTotalMadre - valTotalFrase);
+            
+            //si el padre es mas parecido me quedo con el padre en ambos
+            //y sustituyo a la pareja por el padre
+            if(totPadre < totMadre)
+            {
+                int posPareja = poblacion[i].parejaSeleccion - 1;
+                poblacion[posPareja].cadena = poblacion[i].cadena;
+                boolean t = lista.remove((Integer)posPareja);
+                boolean t2 = lista.remove((Integer)i);
+            }
+            else
+            {
+                int posPareja = poblacion[i].parejaSeleccion - 1;
+                poblacion[i].cadena = poblacion[posPareja].cadena;
+                boolean t = lista.remove((Integer)posPareja);
+                boolean t2 = lista.remove((Integer)i);
+            }
+        }
     }
     
     public void Emparejar()
@@ -131,8 +240,9 @@ public class Genetico {
         return iPosicion;
     }
     
-    public void mostrarPoblacion()
+    public String mostrarPoblacion()
     {
+        String r = "";
         for (int i = 0; i <= tamPoblacion - 1; i++) 
         {
             String cadena = "";
@@ -140,8 +250,10 @@ public class Genetico {
             {
                 cadena = cadena + poblacion[i].cadena.charAt(j) + ",";
             }
-            System.out.println( (i+1) +"-- "+ cadena + " -- " + poblacion[i].parejaSeleccion);
+             r = r + (i+1) +"-- "+ cadena + " -- " + poblacion[i].parejaSeleccion + "\n";
         }
+        
+        return r;
     }
     
 }
