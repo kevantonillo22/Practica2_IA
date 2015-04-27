@@ -87,14 +87,48 @@ public class Genetico {
     public void Emparejar()
     {
         ArrayList lista = new ArrayList();
+        //Lleno mi lista con las posiciones
         for (int i = 0; i <= tamPoblacion - 1; i++) 
         {
-            lista.add(i);
+            lista.add(i+1);   
+        }
+        
+        //Procedo a buscar y emparejar
+        int j = 0;
+        for (int i = 1; i <= tamPoblacion/2; i++) 
+        {
+            int min = 1;
+            int max = numeroMayorLista(lista);
+            Random rand = new Random();
+            int nn = rand.nextInt(max-min + 1);
+            int n =  nn + min;
+            
+            poblacion[(int)lista.get(0) - 1].parejaSeleccion = (int)lista.get(n);
+            poblacion[(int)lista.get(n) - 1].parejaSeleccion = (int)lista.get(j);
+            lista.remove(n);
+            lista.remove(0);
             
         }
         
-        System.out.println(lista.indexOf(5));
-        lista.remove(5);
+        
+    }
+    
+    private int numeroMayorLista(ArrayList lista)
+    {
+        int iNumeroMayor, iPosicion;
+ 
+        //Presuponemos que el numero mayor es el primero
+        iNumeroMayor = (int)lista.get(0);
+        iPosicion = 0;
+        for (int x=1; x <= lista.size() - 1; x++)
+        {
+            if ((int)lista.get(x)>iNumeroMayor)
+            {
+                iNumeroMayor = (int)lista.get(x);
+                iPosicion = x;
+            }    
+        }
+        return iPosicion;
     }
     
     public void mostrarPoblacion()
@@ -106,7 +140,7 @@ public class Genetico {
             {
                 cadena = cadena + poblacion[i].cadena.charAt(j) + ",";
             }
-            System.out.println( (i+1) +"-- "+ cadena);
+            System.out.println( (i+1) +"-- "+ cadena + " -- " + poblacion[i].parejaSeleccion);
         }
     }
     

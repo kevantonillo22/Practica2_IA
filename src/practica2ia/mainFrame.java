@@ -192,8 +192,8 @@ public class mainFrame extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         Genetico algoritmo = new Genetico();
         algoritmo.generarPoblacionLetras(10, 5);
-        //algoritmo.mostrarPoblacion();
         algoritmo.Emparejar();
+        algoritmo.mostrarPoblacion();
         //Random rand = new Random();
         //System.out.println(rand.nextInt(95) + 32);
     }//GEN-LAST:event_jButton1ActionPerformed
