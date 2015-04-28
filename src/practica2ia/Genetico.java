@@ -193,6 +193,78 @@ public class Genetico {
         }
     }
     
+    public void cruceMascarCruce()
+    {
+        ArrayList<Integer> lista = new ArrayList();
+        //Lleno mi lista con las posiciones
+        for (int i = 0; i <= tamPoblacion - 1; i++) 
+        {
+            lista.add(i);   
+        }
+        
+        while (!lista.isEmpty()) 
+        {
+            int posPadre = lista.get(0);
+            int posMadre = poblacion[posPadre].parejaSeleccion - 1;
+            
+            //generamos nuestra mascara de cruce
+            String mascara_cruce1 = "";
+            String mascara_cruce2 = "";
+            for (int j = 0; j <= this.tamIndividuo - 1; j++) 
+            {
+                Random rand = new Random();
+                int r1 = rand.nextInt(2);
+                mascara_cruce1 = mascara_cruce1 + r1;
+                int r2 = rand.nextInt(2);
+                mascara_cruce2 = mascara_cruce2 + r2;
+            }
+            System.out.println(mascara_cruce1);
+            System.out.println(mascara_cruce2);
+            
+            //procedemos a generar el hijo1
+            //y haciendolo con logica negativa 1 == padre, 0 == madre
+            StringBuilder hijo1 = new StringBuilder(poblacion[posPadre].cadena);
+            for (int j = 0; j <= this.tamIndividuo - 1; j++) 
+            {
+                char s = mascara_cruce1.charAt(j);
+                if(s == '1')
+                {
+                    hijo1.setCharAt(j, poblacion[posPadre].cadena.charAt(j));
+                }
+                else
+                {
+                    hijo1.setCharAt(j, poblacion[posMadre].cadena.charAt(j));
+                }
+            }
+            
+            //procedemos a generar el hijo2
+            //teniendo nuestra mascara de cruce distinta al primer hijo
+            //y haciendolo con logica negativa 1 == madre, 0 == padre
+            StringBuilder hijo2 = new StringBuilder(poblacion[posPadre].cadena);
+            for (int j = 0; j <= this.tamIndividuo - 1; j++) 
+            {
+                char s = mascara_cruce2.charAt(j);
+                if(s != '1')
+                {
+                    hijo2.setCharAt(j, poblacion[posPadre].cadena.charAt(j));
+                }
+                else
+                {
+                    hijo2.setCharAt(j, poblacion[posMadre].cadena.charAt(j));
+                }
+            }
+            
+            poblacion[posPadre].cadena = hijo1.toString();
+            poblacion[posMadre].cadena = hijo2.toString();
+            boolean t = lista.remove((Integer)posMadre);
+            boolean t2 = lista.remove((Integer)posPadre);
+        }
+        
+        
+        
+        
+    }
+    
     public void cruce1X()
     {
         ArrayList<Integer> lista = new ArrayList();

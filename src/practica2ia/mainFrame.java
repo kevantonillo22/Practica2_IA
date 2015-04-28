@@ -231,7 +231,7 @@ public class mainFrame extends javax.swing.JFrame {
         val = algoritmo.mostrarPoblacion();
         jTextArea1.setText( jTextArea1.getText() + "EMPAREJADA2\n" + val);
         
-        algoritmo.cruce1X();
+        algoritmo.cruceMascarCruce();
         val = algoritmo.mostrarPoblacion();
         jTextArea1.setText(jTextArea1.getText() + "CRUCE1X\n" + val);
     }//GEN-LAST:event_jButton1ActionPerformed
