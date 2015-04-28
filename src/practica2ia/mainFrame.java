@@ -215,16 +215,25 @@ public class mainFrame extends javax.swing.JFrame {
         String criterioFinalizacion = jComboBox4.getSelectedItem() + "";
         
         Genetico algoritmo = new Genetico(tamPoblacion, tamIndividuo, frase);
+        //generamos la poblacion
         algoritmo.generarPoblacionLetras();
         algoritmo.Emparejar();
         
         String val = algoritmo.mostrarPoblacion();
-        jTextArea1.setText(jTextArea1.getText() + val);
+        jTextArea1.setText(jTextArea1.getText() + "EMPAREJADA1\n" + val);
+        
+        //seleccionamos tipo de padre
         algoritmo.seleccionTipo1();
-        
         val = algoritmo.mostrarPoblacion();
-        jTextArea1.setText(jTextArea1.getText() + val);
+        jTextArea1.setText(jTextArea1.getText() + "SELECCION_TIPO1\n" +val);
         
+        algoritmo.Emparejar();
+        val = algoritmo.mostrarPoblacion();
+        jTextArea1.setText( jTextArea1.getText() + "EMPAREJADA2\n" + val);
+        
+        algoritmo.cruce1X();
+        val = algoritmo.mostrarPoblacion();
+        jTextArea1.setText(jTextArea1.getText() + "CRUCE1X\n" + val);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTextField3KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField3KeyTyped

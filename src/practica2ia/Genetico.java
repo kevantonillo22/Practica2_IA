@@ -193,6 +193,62 @@ public class Genetico {
         }
     }
     
+    public void cruce1X()
+    {
+        ArrayList<Integer> lista = new ArrayList();
+        //Lleno mi lista con las posiciones
+        for (int i = 0; i <= tamPoblacion - 1; i++) 
+        {
+            lista.add(i);   
+        }
+        
+        while (!lista.isEmpty()) 
+        {
+            //decidimos un punto de cruce (de una vez me devuelve el valor con un valor de indice empezando desde 0)
+            int largo_cruce = this.tamIndividuo - 1;
+            Random rand = new Random();
+            int punto_cruce = rand.nextInt(largo_cruce);
+            int posPadre = lista.get(0);
+            
+            //se setean las posiciones del padre
+            //del primer hijo
+            StringBuilder hijo1 = new StringBuilder(poblacion[posPadre].cadena);
+            for (int j = 0; j <= punto_cruce; j++) 
+            {
+                hijo1.setCharAt(j, poblacion[posPadre].cadena.charAt(j));
+            }
+            
+            //se setean las posiciones de la madre
+            //del primer hijo
+            int posMadre = poblacion[posPadre].parejaSeleccion - 1;
+            for (int j = punto_cruce + 1; j <= largo_cruce; j++) 
+            {
+                hijo1.setCharAt(j, poblacion[posMadre].cadena.charAt(j));
+            }
+            
+            
+            //se setean las posiciones del padre
+            //del segundo hijo
+            StringBuilder hijo2 = new StringBuilder(poblacion[posMadre].cadena);
+            for (int j = 0; j <= punto_cruce; j++) 
+            {
+                hijo2.setCharAt(j, poblacion[posMadre].cadena.charAt(j));
+            }
+            
+            //se setean las posiciones de la madre
+            //del segundo hijo
+            for (int j = punto_cruce + 1; j <= largo_cruce; j++) 
+            {
+                hijo2.setCharAt(j, poblacion[posPadre].cadena.charAt(j));
+            }
+            
+            poblacion[posPadre].cadena = hijo1.toString();
+            poblacion[posMadre].cadena = hijo2.toString();
+            boolean t = lista.remove((Integer)posMadre);
+            boolean t2 = lista.remove((Integer)posPadre);
+        }
+    }
+    
     public void Emparejar()
     {
         ArrayList lista = new ArrayList();
