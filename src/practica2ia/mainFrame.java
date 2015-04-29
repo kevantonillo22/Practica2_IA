@@ -214,7 +214,7 @@ public class mainFrame extends javax.swing.JFrame {
         int numMutacion = Integer.parseInt(jTextField1.getText());
         String criterioFinalizacion = jComboBox4.getSelectedItem() + "";
         
-        Genetico algoritmo = new Genetico(tamPoblacion, tamIndividuo, frase);
+        Genetico algoritmo = new Genetico(tamPoblacion, tamIndividuo, frase, numMutacion);
         //generamos la poblacion
         algoritmo.generarPoblacionLetras();
         algoritmo.Emparejar();

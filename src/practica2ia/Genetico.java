@@ -33,13 +33,15 @@ public class Genetico {
     public int tamPoblacion;
     public int tamIndividuo;
     public String frase;
-
-    Genetico(int tamPoblacion, int tamIndividuo, String frase) 
+    public int num_mutaciones;
+    
+    Genetico(int tamPoblacion, int tamIndividuo, String frase, int numMutaciones) 
     {
         poblacion = new Individuo[tamPoblacion];
         this.tamPoblacion = tamPoblacion;
         this.tamIndividuo = tamIndividuo;
         this.frase = frase;
+        this.num_mutaciones = numMutaciones;
     }
     
     public void generarPoblacionAlfaNumerico()
@@ -79,6 +81,8 @@ public class Genetico {
             poblacion[i] = ind;
         }
     }
+    
+    
     
     //saco el valor cada elemento del individuo y cada
     //uno de esos valores lo resto con la posicion correspondiente de la frase
@@ -384,4 +388,94 @@ public class Genetico {
         return r;
     }
     
+    public void mutar()
+    {
+        ArrayList lis = new ArrayList();
+        //Lleno mi lista con las posiciones
+        for (int i = 0; i <= tamPoblacion - 1; i++) 
+        {
+            lis.add(i);   
+        }
+        
+        ArrayList lista = new ArrayList();
+        //Lleno mi lista con las posiciones
+        for (int i = 0; i <= num_mutaciones - 1; i++) 
+        {
+            Random rand = new Random();
+            int n = rand.nextInt(lis.size());
+            
+            lista.add(lis.get(n));
+            lis.remove(n);
+        }
+        
+        //con los valores dentro de la variable lista
+        //procedemos a realizar las mutaciones entre 
+        Random rand = new Random();
+        double probabilidad_mutacion = rand.nextDouble();
+        for (int i = 0; i <= lista.size() - 1; i++) 
+        {
+            int pos = Integer.parseInt(lista.get(i).toString());
+            StringBuilder hijo_mutar = new StringBuilder(poblacion[pos].cadena);
+            
+            for (int j = 0; j <= tamIndividuo - 1; j++) 
+            {
+                Random ran = new Random();
+                double prob = ran.nextDouble();
+                if(prob < probabilidad_mutacion)
+                {
+                    int valIndividuo = poblacion[pos].cadena.charAt(j);
+                    int valFrase = this.frase.charAt(j);
+                    
+                    if(valIndividuo > valFrase)
+                    {
+                        if(valIndividuo == 65)
+                        {
+                            int v = 57;
+                            hijo_mutar.setCharAt(j, (char)v);
+                        }
+                        else if(valIndividuo == 97)
+                        {
+                            int v = 90;
+                            hijo_mutar.setCharAt(j, (char)v);
+                        }
+                        else if(valIndividuo == 48)
+                        {
+                            int v = 32;
+                            hijo_mutar.setCharAt(j, (char)v);
+                        }
+                        else
+                        {
+                            int v = valIndividuo - 1;
+                            hijo_mutar.setCharAt(j, (char)v);
+                        }
+                        
+                    }else if(valIndividuo < valFrase)
+                    {
+                        if(valIndividuo == 32)
+                        {
+                            int v = 48;
+                            hijo_mutar.setCharAt(j, (char)v);
+                        }
+                        else if(valIndividuo == 57)
+                        {
+                            int v = 65;
+                            hijo_mutar.setCharAt(j, (char)v);
+                        }
+                        else if(valIndividuo == 90)
+                        {
+                            int v = 97;
+                            hijo_mutar.setCharAt(j, (char)v);
+                        }
+                        else
+                        {
+                            int v = valIndividuo + 1;
+                            hijo_mutar.setCharAt(j, (char)v);
+                        }
+                    }
+                }
+            }
+            
+            poblacion[pos].cadena = hijo_mutar.toString();
+        }
+    }
 }
