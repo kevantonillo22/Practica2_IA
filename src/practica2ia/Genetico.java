@@ -37,6 +37,10 @@ public class Genetico {
     public String frase;
     public int num_mutaciones;
     
+    public int fitnessTotal_sig = 0;
+    public int fitnessTotal_ant = 0;
+    
+    
     Genetico(int tamPoblacion, int tamIndividuo, String frase, int numMutaciones) 
     {
         poblacion = new Individuo[tamPoblacion];
@@ -94,7 +98,39 @@ public class Genetico {
         }
     }
     
+    public void calcularFitness_sig()
+    {
+        for (int i = 0; i <= tamPoblacion; i++) 
+        {
+            int valTotal = 0;
+            for (int j = 0; j <= tamIndividuo; j++) 
+            {
+                int val1 = poblacion[i].cadena.charAt(j);
+                int val2 = frase.charAt(j);
+                valTotal = valTotal + Math.abs(val1 - val2);
+            }
+            poblacion[i].fitness = valTotal;
+            fitnessTotal_sig = fitnessTotal_sig + valTotal;
+        }
+        
+        
+    }
     
+    public void calcularFitness_ant()
+    {
+        for (int i = 0; i <= tamPoblacion; i++) 
+        {
+            int valTotal = 0;
+            for (int j = 0; j <= tamIndividuo; j++) 
+            {
+                int val1 = poblacion_ant[i].cadena.charAt(j);
+                int val2 = frase.charAt(j);
+                valTotal = valTotal + Math.abs(val1 - val2);
+            }
+            poblacion_ant[i].fitness = valTotal;
+            fitnessTotal_ant = fitnessTotal_ant + valTotal;
+        }
+    }
     
     //saco el valor cada elemento del individuo y cada
     //uno de esos valores lo resto con la posicion correspondiente de la frase
@@ -129,6 +165,8 @@ public class Genetico {
                 
                 valTotalPadre = valTotalPadre + Math.abs(valPadre - valFrase);
                 valTotalMadre = valTotalMadre + Math.abs(valMadre - valFrase);
+                
+                
             }
             
             //si el padre es mas parecido me quedo con el padre en ambos
@@ -234,8 +272,6 @@ public class Genetico {
                 int r2 = rand.nextInt(2);
                 mascara_cruce2 = mascara_cruce2 + r2;
             }
-            System.out.println(mascara_cruce1);
-            System.out.println(mascara_cruce2);
             
             //procedemos a generar el hijo1
             //y haciendolo con logica negativa 1 == padre, 0 == madre
@@ -420,6 +456,10 @@ public class Genetico {
             lis.remove(n);
         }
         
+        for (int i = 0; i <= lista.size() - 1; i++) 
+        {
+            System.out.println(lista.get(i));
+        }
         //con los valores dentro de la variable lista
         //procedemos a realizar las mutaciones entre 
         Random rand = new Random();
@@ -489,5 +529,10 @@ public class Genetico {
             
             poblacion[pos].cadena = hijo_mutar.toString();
         }
+    }
+    
+    public void reemplazoEtilistaActual()
+    {
+        
     }
 }

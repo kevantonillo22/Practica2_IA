@@ -43,6 +43,8 @@ public class mainFrame extends javax.swing.JFrame {
         jComboBox4 = new javax.swing.JComboBox();
         jLabel8 = new javax.swing.JLabel();
         jTextField3 = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        jComboBox5 = new javax.swing.JComboBox();
         jLabel6 = new javax.swing.JLabel();
         jTextField2 = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
@@ -69,7 +71,7 @@ public class mainFrame extends javax.swing.JFrame {
 
         jLabel5.setText("Número de individuos para mutación");
 
-        jTextField1.setText("10");
+        jTextField1.setText("4");
         jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jTextField1KeyTyped(evt);
@@ -85,7 +87,7 @@ public class mainFrame extends javax.swing.JFrame {
 
         jComboBox4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tipo1", "Tipo2" }));
 
-        jLabel8.setText("Criterio de finalización");
+        jLabel8.setText("Tipo reemplazo");
 
         jTextField3.setText("10");
         jTextField3.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -93,6 +95,10 @@ public class mainFrame extends javax.swing.JFrame {
                 jTextField3KeyTyped(evt);
             }
         });
+
+        jLabel9.setText("Criterio de finalización");
+
+        jComboBox5.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tipo1", "Tipo2" }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -109,11 +115,13 @@ public class mainFrame extends javax.swing.JFrame {
                     .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1)
                     .addComponent(jLabel8)
                     .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 86, Short.MAX_VALUE))
+                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel9)
+                    .addComponent(jComboBox5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1))
+                .addGap(0, 95, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -142,9 +150,12 @@ public class mainFrame extends javax.swing.JFrame {
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel9)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jComboBox5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addComponent(jButton1))
         );
 
         jLabel6.setText("Frase");
@@ -177,7 +188,7 @@ public class mainFrame extends javax.swing.JFrame {
                             .addComponent(jLabel6)
                             .addComponent(jLabel7))
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 335, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 326, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -212,7 +223,8 @@ public class mainFrame extends javax.swing.JFrame {
         int tamIndividuo = jTextField2.getText().trim().length();
         String frase = jTextField2.getText().trim();
         int numMutacion = Integer.parseInt(jTextField1.getText());
-        String criterioFinalizacion = jComboBox4.getSelectedItem() + "";
+        String tipoReemplazo = jComboBox4.getSelectedItem() + "";
+        String criterioFinalizacion = jComboBox5.getSelectedItem() + "";
         
         Genetico algoritmo = new Genetico(tamPoblacion, tamIndividuo, frase, numMutacion);
         //generamos la poblacion
@@ -234,6 +246,15 @@ public class mainFrame extends javax.swing.JFrame {
         algoritmo.cruceMascarCruce();
         val = algoritmo.mostrarPoblacion();
         jTextArea1.setText(jTextArea1.getText() + "CRUCE1X\n" + val);
+        
+        algoritmo.mutar();
+        val = algoritmo.mostrarPoblacion();
+        jTextArea1.setText(jTextArea1.getText() + "MUTACION\n" + val);
+        
+        //calculamos fitness de las poblaciones
+        algoritmo.calcularFitness_ant();
+        algoritmo.calcularFitness_sig();
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTextField3KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField3KeyTyped
@@ -301,6 +322,7 @@ public class mainFrame extends javax.swing.JFrame {
     private javax.swing.JComboBox jComboBox2;
     private javax.swing.JComboBox jComboBox3;
     private javax.swing.JComboBox jComboBox4;
+    private javax.swing.JComboBox jComboBox5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -309,6 +331,7 @@ public class mainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;

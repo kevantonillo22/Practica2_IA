@@ -12,11 +12,13 @@ package practica2ia;
 public class Individuo {
     public String cadena;
     public int parejaSeleccion;
+    public int fitness;
     
     public Individuo(String cadena)
     {
         this.cadena = cadena;
         this.parejaSeleccion = -1;
+        this.fitness = 0;
     }
     
     
