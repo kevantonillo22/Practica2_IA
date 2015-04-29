@@ -21,6 +21,8 @@ public class Genetico {
     
     
     public Individuo[] poblacion;
+    public Individuo[] poblacion_ant;
+    
     
     public int[] caracteres = 
     {48,49,50,51,52,53,54,55,56,57,32,
@@ -38,6 +40,8 @@ public class Genetico {
     Genetico(int tamPoblacion, int tamIndividuo, String frase, int numMutaciones) 
     {
         poblacion = new Individuo[tamPoblacion];
+        poblacion_ant = new Individuo[tamPoblacion];
+        
         this.tamPoblacion = tamPoblacion;
         this.tamIndividuo = tamIndividuo;
         this.frase = frase;
@@ -59,6 +63,14 @@ public class Genetico {
             }
             Individuo ind = new Individuo(individuo);
             poblacion[i] = ind;
+        }
+        
+        //seteo la poblacion que va a quedar como la poblacion inicial luego de todo el proceso
+        
+        for (int i = 0; i <= tamPoblacion - 1; i++) 
+        {
+            Individuo ind = new Individuo(poblacion[i].cadena);
+            poblacion_ant[i] = ind;
         }
     }
     
