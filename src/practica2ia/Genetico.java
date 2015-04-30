@@ -6,6 +6,7 @@
 package practica2ia;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Random;
 
 /**
@@ -96,14 +97,22 @@ public class Genetico {
             Individuo ind = new Individuo(individuo);
             poblacion[i] = ind;
         }
+        
+        //seteo la poblacion que va a quedar como la poblacion inicial luego de todo el proceso
+        
+        for (int i = 0; i <= tamPoblacion - 1; i++) 
+        {
+            Individuo ind = new Individuo(poblacion[i].cadena);
+            poblacion_ant[i] = ind;
+        }
     }
     
     public void calcularFitness_sig()
     {
-        for (int i = 0; i <= tamPoblacion; i++) 
+        for (int i = 0; i <= tamPoblacion - 1; i++) 
         {
             int valTotal = 0;
-            for (int j = 0; j <= tamIndividuo; j++) 
+            for (int j = 0; j <= tamIndividuo - 1; j++) 
             {
                 int val1 = poblacion[i].cadena.charAt(j);
                 int val2 = frase.charAt(j);
@@ -118,10 +127,10 @@ public class Genetico {
     
     public void calcularFitness_ant()
     {
-        for (int i = 0; i <= tamPoblacion; i++) 
+        for (int i = 0; i <= tamPoblacion - 1; i++) 
         {
             int valTotal = 0;
-            for (int j = 0; j <= tamIndividuo; j++) 
+            for (int j = 0; j <= tamIndividuo - 1; j++) 
             {
                 int val1 = poblacion_ant[i].cadena.charAt(j);
                 int val2 = frase.charAt(j);
@@ -430,7 +439,7 @@ public class Genetico {
             {
                 cadena = cadena + poblacion[i].cadena.charAt(j) + ",";
             }
-             r = r + (i+1) +"-- "+ cadena + " -- " + poblacion[i].parejaSeleccion + "\n";
+             r = r + (i+1) +"-- "+ cadena + " -- " + poblacion[i].parejaSeleccion + "-----" + poblacion[i].fitness + "\n";
         }
         
         return r;
@@ -531,8 +540,84 @@ public class Genetico {
         }
     }
     
-    public void reemplazoEtilistaActual()
+    public void reemplazoEtilistaGeneral()
     {
+        //creamos copias de ambas poblaciones antes de hacer el reemplazo
+        ArrayList copia_ant = new ArrayList();
+        ArrayList copia_sig = new ArrayList();
+        
+        for (int i = 0; i <= this.tamPoblacion - 1; i++) 
+        {
+            Individuo ind = new Individuo(poblacion_ant[i].cadena);
+            ind.fitness = poblacion_ant[i].fitness;
+            ind.parejaSeleccion = poblacion_ant[i].parejaSeleccion;
+            copia_ant.add(ind);
+            
+            Individuo ind2 = new Individuo(poblacion[i].cadena);
+            ind2.fitness = poblacion[i].fitness;
+            ind2.parejaSeleccion = poblacion[i].parejaSeleccion;
+            copia_sig.add(ind2);
+        }
+        
+        Collections.sort(copia_ant);
+        Collections.sort(copia_sig);
+        
+        for (int i = 0; i <= copia_ant.size() - 1; i++) 
+        {
+            System.out.println("Cadena: " + ((Individuo)copia_ant.get(i)).cadena + "---fitness: " + ((Individuo)copia_ant.get(i)).fitness);
+        }
+        
+        int t = (this.tamPoblacion/2);
+        
+        int zz = 0;
+        for (int i = 0; i <= t - 1; i++) 
+        {
+            poblacion[zz].cadena = ((Individuo)copia_ant.get(i)).cadena;
+            poblacion[zz].fitness = ((Individuo)copia_ant.get(i)).fitness;
+            zz++;
+        }
+        
+        for (int i = 0; i <= t - 1; i++) 
+        {
+            poblacion[zz].cadena = ((Individuo)copia_sig.get(i)).cadena;
+            poblacion[zz].fitness = ((Individuo)copia_sig.get(i)).fitness;
+            zz++;
+        }
+        
+    }
+    
+    
+    public void reemplazoAleatorio()
+    {
+        ArrayList lis = new ArrayList();
+        //Lleno mi lista con las posiciones
+        for (int i = 0; i <= tamPoblacion - 1; i++) 
+        {
+            lis.add(i);   
+        }
+        
+        int mitad = (tamPoblacion/2);
+        Random ra = new Random();
+        int descendientes = ra.nextInt(mitad) ;
+        ArrayList lista = new ArrayList();
+        //Lleno mi lista con las posiciones
+        for (int i = 0; i <= descendientes; i++) 
+        {
+            Random rand = new Random();
+            int n = rand.nextInt(lis.size());
+            
+            lista.add(lis.get(n));
+            lis.remove(n);
+        }
+        
+        for (int i = 0; i <= lista.size() - 1; i++) 
+        {
+            int val = Integer.parseInt(lista.get(i).toString());
+            
+            poblacion[val].cadena = poblacion_ant[val].cadena;
+            poblacion[val].fitness = poblacion_ant[val].fitness;
+        }
+        
         
     }
 }

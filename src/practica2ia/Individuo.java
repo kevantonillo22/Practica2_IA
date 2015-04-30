@@ -9,7 +9,7 @@ package practica2ia;
  *
  * @author Kev
  */
-public class Individuo {
+public class Individuo implements Comparable {
     public String cadena;
     public int parejaSeleccion;
     public int fitness;
@@ -19,6 +19,13 @@ public class Individuo {
         this.cadena = cadena;
         this.parejaSeleccion = -1;
         this.fitness = 0;
+    }
+
+    @Override
+    public int compareTo(Object t) 
+    {
+        int c = ((Individuo)t).fitness;
+        return this.fitness - c;
     }
     
     

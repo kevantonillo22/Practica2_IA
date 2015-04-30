@@ -229,6 +229,8 @@ public class mainFrame extends javax.swing.JFrame {
         Genetico algoritmo = new Genetico(tamPoblacion, tamIndividuo, frase, numMutacion);
         //generamos la poblacion
         algoritmo.generarPoblacionLetras();
+        algoritmo.calcularFitness_ant();
+        algoritmo.calcularFitness_sig();
         algoritmo.Emparejar();
         
         String val = algoritmo.mostrarPoblacion();
@@ -236,18 +238,26 @@ public class mainFrame extends javax.swing.JFrame {
         
         //seleccionamos tipo de padre
         algoritmo.seleccionTipo1();
+        algoritmo.calcularFitness_ant();
+        algoritmo.calcularFitness_sig();
         val = algoritmo.mostrarPoblacion();
         jTextArea1.setText(jTextArea1.getText() + "SELECCION_TIPO1\n" +val);
         
         algoritmo.Emparejar();
+        algoritmo.calcularFitness_ant();
+        algoritmo.calcularFitness_sig();
         val = algoritmo.mostrarPoblacion();
         jTextArea1.setText( jTextArea1.getText() + "EMPAREJADA2\n" + val);
         
         algoritmo.cruceMascarCruce();
+        algoritmo.calcularFitness_ant();
+        algoritmo.calcularFitness_sig();
         val = algoritmo.mostrarPoblacion();
         jTextArea1.setText(jTextArea1.getText() + "CRUCE1X\n" + val);
         
         algoritmo.mutar();
+        algoritmo.calcularFitness_ant();
+        algoritmo.calcularFitness_sig();
         val = algoritmo.mostrarPoblacion();
         jTextArea1.setText(jTextArea1.getText() + "MUTACION\n" + val);
         
@@ -255,6 +265,11 @@ public class mainFrame extends javax.swing.JFrame {
         algoritmo.calcularFitness_ant();
         algoritmo.calcularFitness_sig();
         
+        
+        
+        algoritmo.reemplazoEtilistaGeneral();
+        val = algoritmo.mostrarPoblacion();
+        jTextArea1.setText(jTextArea1.getText() + "REEMPLAZO\n" + val);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTextField3KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField3KeyTyped
