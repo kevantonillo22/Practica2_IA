@@ -465,10 +465,7 @@ public class Genetico {
             lis.remove(n);
         }
         
-        for (int i = 0; i <= lista.size() - 1; i++) 
-        {
-            System.out.println(lista.get(i));
-        }
+        
         //con los valores dentro de la variable lista
         //procedemos a realizar las mutaciones entre 
         Random rand = new Random();
@@ -617,7 +614,18 @@ public class Genetico {
             poblacion[val].cadena = poblacion_ant[val].cadena;
             poblacion[val].fitness = poblacion_ant[val].fitness;
         }
+        System.out.println(descendientes);
+    }
+    
+    public void prepararNuevaIteracion()
+    {
+        //seteo la poblacion que va a quedar como la poblacion inicial luego de todo el proceso
         
-        
+        for (int i = 0; i <= tamPoblacion - 1; i++) 
+        {
+            Individuo ind = new Individuo(poblacion[i].cadena);
+            ind.fitness = poblacion[i].fitness;
+            poblacion_ant[i] = ind;
+        }
     }
 }

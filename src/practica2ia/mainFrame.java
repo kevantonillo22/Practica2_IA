@@ -16,6 +16,9 @@ public class mainFrame extends javax.swing.JFrame {
     /**
      * Creates new form mainFrame
      */
+    
+    Genetico algoritmo;
+    
     public mainFrame() {
         initComponents();
     }
@@ -45,6 +48,8 @@ public class mainFrame extends javax.swing.JFrame {
         jTextField3 = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         jComboBox5 = new javax.swing.JComboBox();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         jTextField2 = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
@@ -67,7 +72,7 @@ public class mainFrame extends javax.swing.JFrame {
 
         jLabel4.setText("Forma de cruce");
 
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tipo1", "Tipo2" }));
+        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Cruce1X", "Mascara de cruce" }));
 
         jLabel5.setText("Número de individuos para mutación");
 
@@ -78,18 +83,23 @@ public class mainFrame extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("jButton1");
+        jButton1.setText("Emepezar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
 
-        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tipo1", "Tipo2" }));
+        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Etilista general", "Aleatorio" }));
 
         jLabel8.setText("Tipo reemplazo");
 
         jTextField3.setText("10");
+        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField3ActionPerformed(evt);
+            }
+        });
         jTextField3.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jTextField3KeyTyped(evt);
@@ -100,28 +110,50 @@ public class mainFrame extends javax.swing.JFrame {
 
         jComboBox5.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tipo1", "Tipo2" }));
 
+        jButton2.setText(">");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jButton3.setText("<");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4)
-                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8)
-                    .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel9)
-                    .addComponent(jComboBox5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
-                .addGap(0, 95, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 91, Short.MAX_VALUE)
+                        .addComponent(jButton3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton2))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3)
+                            .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4)
+                            .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5)
+                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel8)
+                            .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel9)
+                            .addComponent(jComboBox5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -155,7 +187,10 @@ public class mainFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jComboBox5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
-                .addComponent(jButton1))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2)
+                    .addComponent(jButton3)))
         );
 
         jLabel6.setText("Frase");
@@ -164,6 +199,11 @@ public class mainFrame extends javax.swing.JFrame {
         jTextField2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField2ActionPerformed(evt);
+            }
+        });
+        jTextField2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField2KeyTyped(evt);
             }
         });
 
@@ -214,62 +254,91 @@ public class mainFrame extends javax.swing.JFrame {
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField2ActionPerformed
-
+    
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         String codificacion = jComboBox1.getSelectedItem() + "";
         int tamPoblacion = Integer.parseInt(jTextField3.getText());
         String seleccionPadres = jComboBox2.getSelectedItem() + "";
-        String cruce = jComboBox3.getSelectedItem() + "";
+        int cruce = jComboBox3.getSelectedIndex();
         int tamIndividuo = jTextField2.getText().trim().length();
         String frase = jTextField2.getText().trim();
         int numMutacion = Integer.parseInt(jTextField1.getText());
-        String tipoReemplazo = jComboBox4.getSelectedItem() + "";
+        int tipoReemplazo = jComboBox4.getSelectedIndex();
         String criterioFinalizacion = jComboBox5.getSelectedItem() + "";
         
-        Genetico algoritmo = new Genetico(tamPoblacion, tamIndividuo, frase, numMutacion);
+        algoritmo = new Genetico(tamPoblacion, tamIndividuo, frase, numMutacion);
         //generamos la poblacion
-        algoritmo.generarPoblacionLetras();
+        if(codificacion.equals("Letras"))
+        {
+            algoritmo.generarPoblacionLetras();
+        }
+        else
+        {
+            algoritmo.generarPoblacionAlfaNumerico();
+        }
         algoritmo.calcularFitness_ant();
         algoritmo.calcularFitness_sig();
         algoritmo.Emparejar();
         
         String val = algoritmo.mostrarPoblacion();
-        jTextArea1.setText(jTextArea1.getText() + "EMPAREJADA1\n" + val);
+        jTextArea1.setText(jTextArea1.getText() + "PADRES\n" + val);
         
         //seleccionamos tipo de padre
-        algoritmo.seleccionTipo1();
+        if(seleccionPadres.equals("Tipo1"))
+        {
+            algoritmo.seleccionTipo1();
+        }
+        else
+        {
+            algoritmo.SeleccionTipo2();
+        }
         algoritmo.calcularFitness_ant();
         algoritmo.calcularFitness_sig();
-        val = algoritmo.mostrarPoblacion();
-        jTextArea1.setText(jTextArea1.getText() + "SELECCION_TIPO1\n" +val);
+        
+        //val = algoritmo.mostrarPoblacion();
+        //jTextArea1.setText(jTextArea1.getText() + "SELECCION_TIPO1\n" +val);
         
         algoritmo.Emparejar();
         algoritmo.calcularFitness_ant();
         algoritmo.calcularFitness_sig();
-        val = algoritmo.mostrarPoblacion();
-        jTextArea1.setText( jTextArea1.getText() + "EMPAREJADA2\n" + val);
+        //val = algoritmo.mostrarPoblacion();
+        //jTextArea1.setText( jTextArea1.getText() + "EMPAREJADA2\n" + val);
         
-        algoritmo.cruceMascarCruce();
+        //realización de cruce
+        if(cruce == 0)
+        {
+            algoritmo.cruce1X();
+        }
+        else
+        {
+            algoritmo.cruceMascarCruce();
+        }
         algoritmo.calcularFitness_ant();
         algoritmo.calcularFitness_sig();
-        val = algoritmo.mostrarPoblacion();
-        jTextArea1.setText(jTextArea1.getText() + "CRUCE1X\n" + val);
+        //val = algoritmo.mostrarPoblacion();
+        //jTextArea1.setText(jTextArea1.getText() + "CRUCE1X\n" + val);
         
         algoritmo.mutar();
         algoritmo.calcularFitness_ant();
         algoritmo.calcularFitness_sig();
-        val = algoritmo.mostrarPoblacion();
-        jTextArea1.setText(jTextArea1.getText() + "MUTACION\n" + val);
+        //val = algoritmo.mostrarPoblacion();
+        //jTextArea1.setText(jTextArea1.getText() + "MUTACION\n" + val);
         
         //calculamos fitness de las poblaciones
         algoritmo.calcularFitness_ant();
         algoritmo.calcularFitness_sig();
         
+        if(tipoReemplazo == 0)
+        {
+            algoritmo.reemplazoEtilistaGeneral();
+        }
+        else
+        {
+            algoritmo.reemplazoAleatorio();
+        }
         
-        
-        algoritmo.reemplazoEtilistaGeneral();
         val = algoritmo.mostrarPoblacion();
-        jTextArea1.setText(jTextArea1.getText() + "REEMPLAZO\n" + val);
+        jTextArea1.setText(jTextArea1.getText() + "DESCENDIENTES\n" + val);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTextField3KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField3KeyTyped
@@ -295,6 +364,43 @@ public class mainFrame extends javax.swing.JFrame {
            evt.consume();  // ignorar el evento de teclado
         }
     }//GEN-LAST:event_jTextField1KeyTyped
+
+    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField3ActionPerformed
+
+    private void jTextField2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField2KeyTyped
+        int caracter = evt.getKeyChar();
+        
+        //Letras
+        if(jComboBox1.getSelectedIndex() == 0)
+        {
+            // solo letras
+            if(((caracter > 0 && caracter < 65) || (caracter > 90 && caracter < 97) || (caracter > 122 && caracter <= 127)) &&
+               (caracter != '\b' /*corresponde a BACK_SPACE*/) && caracter != 32)
+            {
+               evt.consume();  // ignorar el evento de teclado
+            }
+        }
+        else
+        {
+            // Verificar si la tecla pulsada no es un digito
+            if(((caracter > 0 && caracter < 48) || (caracter > 57 && caracter < 65) || (caracter > 90 && caracter < 97) || (caracter > 122 && caracter <= 127)) &&
+               (caracter != '\b' /*corresponde a BACK_SPACE*/) && caracter != 32)
+            {
+               evt.consume();  // ignorar el evento de teclado
+            }
+        }
+        
+    }//GEN-LAST:event_jTextField2KeyTyped
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -333,6 +439,8 @@ public class mainFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JComboBox jComboBox2;
     private javax.swing.JComboBox jComboBox3;
