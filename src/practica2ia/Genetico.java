@@ -53,6 +53,7 @@ public class Genetico {
         this.num_mutaciones = numMutaciones;
     }
     
+    
     public void generarPoblacionAlfaNumerico()
     {
         for (int i = 0; i <= tamPoblacion - 1; i++) 
@@ -109,6 +110,7 @@ public class Genetico {
     
     public void calcularFitness_sig()
     {
+        fitnessTotal_sig = 0;
         for (int i = 0; i <= tamPoblacion - 1; i++) 
         {
             int valTotal = 0;
@@ -127,6 +129,7 @@ public class Genetico {
     
     public void calcularFitness_ant()
     {
+        fitnessTotal_ant = 0;
         for (int i = 0; i <= tamPoblacion - 1; i++) 
         {
             int valTotal = 0;
@@ -439,10 +442,54 @@ public class Genetico {
             {
                 cadena = cadena + poblacion[i].cadena.charAt(j) + ",";
             }
-             r = r + (i+1) +"-- "+ cadena + " -- " + poblacion[i].parejaSeleccion + "-----" + poblacion[i].fitness + "\n";
+             r = r + (i+1) +"-- "+ cadena + " -- " + "Fitness=" + poblacion[i].fitness + "\n";
         }
         
         return r;
+    }
+    
+    public String mostrar10mejores()
+    {
+        //creamos copias de ambas poblaciones antes de hacer el reemplazo
+        ArrayList copia_ant = new ArrayList();
+        ArrayList copia_sig = new ArrayList();
+        
+        for (int i = 0; i <= this.tamPoblacion - 1; i++) 
+        {
+            Individuo ind = new Individuo(poblacion_ant[i].cadena);
+            ind.fitness = poblacion_ant[i].fitness;
+            ind.parejaSeleccion = poblacion_ant[i].parejaSeleccion;
+            copia_ant.add(ind);
+            
+            Individuo ind2 = new Individuo(poblacion[i].cadena);
+            ind2.fitness = poblacion[i].fitness;
+            ind2.parejaSeleccion = poblacion[i].parejaSeleccion;
+            copia_sig.add(ind2);
+        }
+        
+        Collections.sort(copia_ant);
+        Collections.sort(copia_sig);
+        String resultado = "";
+        String r1 = "";
+        String r2 = "";
+        for (int i = 0; i <= 10 - 1; i++) 
+        {
+            String cadena1 = "";
+            String cadena2 = "";
+            
+            for (int j = 0; j <= tamIndividuo - 1; j++) 
+            {
+                cadena1 = cadena1 + ((Individuo)copia_ant.get(i)).cadena.charAt(j) + ",";
+                cadena2 = cadena2 + ((Individuo)copia_sig.get(i)).cadena.charAt(j) + ",";
+            }
+             r1 = r1 + (i+1) +"-- "+ cadena1 + " -- " + "Fitness=" + ((Individuo)copia_ant.get(i)).fitness + "\n";
+             r2 = r2 + (i+1) +"-- "+ cadena2 + " -- " + "Fitness=" + ((Individuo)copia_sig.get(i)).fitness + "\n";
+        }
+        resultado = "PADRES\n" + r1;
+        resultado = resultado + "DESCENDIENTES\n" + r2;
+        
+        
+        return resultado;
     }
     
     public void mutar()
@@ -537,6 +584,8 @@ public class Genetico {
         }
     }
     
+    
+    
     public void reemplazoEtilistaGeneral()
     {
         //creamos copias de ambas poblaciones antes de hacer el reemplazo
@@ -559,10 +608,16 @@ public class Genetico {
         Collections.sort(copia_ant);
         Collections.sort(copia_sig);
         
+        /*System.out.println("********************");
         for (int i = 0; i <= copia_ant.size() - 1; i++) 
         {
             System.out.println("Cadena: " + ((Individuo)copia_ant.get(i)).cadena + "---fitness: " + ((Individuo)copia_ant.get(i)).fitness);
         }
+        System.out.println("--------------------");
+        for (int i = 0; i <= copia_sig.size() - 1; i++) 
+        {
+            System.out.println("Cadena: " + ((Individuo)copia_sig.get(i)).cadena + "---fitness: " + ((Individuo)copia_sig.get(i)).fitness);
+        }*/
         
         int t = (this.tamPoblacion/2);
         
@@ -582,7 +637,6 @@ public class Genetico {
         }
         
     }
-    
     
     public void reemplazoAleatorio()
     {

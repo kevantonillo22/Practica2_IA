@@ -18,6 +18,7 @@ public class mainFrame extends javax.swing.JFrame {
      */
     
     Genetico algoritmo;
+    int iteracion = 0;
     
     public mainFrame() {
         initComponents();
@@ -49,7 +50,12 @@ public class mainFrame extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jComboBox5 = new javax.swing.JComboBox();
         jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
+        jTextField4 = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
+        jButton5 = new javax.swing.JButton();
+        jLabel11 = new javax.swing.JLabel();
+        jComboBox6 = new javax.swing.JComboBox();
         jLabel6 = new javax.swing.JLabel();
         jTextField2 = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
@@ -83,7 +89,7 @@ public class mainFrame extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Emepezar");
+        jButton1.setText("Primera Iteracion");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -108,19 +114,45 @@ public class mainFrame extends javax.swing.JFrame {
 
         jLabel9.setText("Criterio de finalización");
 
-        jComboBox5.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tipo1", "Tipo2" }));
+        jComboBox5.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Convergencia", "Iteraciones", "Solucion encontrada" }));
+        jComboBox5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox5ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText(">");
+        jButton2.setEnabled(false);
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
 
-        jButton3.setText("<");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        jButton4.setText("Limpiar");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                jButton4ActionPerformed(evt);
+            }
+        });
+
+        jTextField4.setText("80");
+
+        jLabel10.setText("%");
+
+        jButton5.setText("Analisis Completo");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
+        jLabel11.setText("Mostrar");
+
+        jComboBox6.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Todo", "10 mejores" }));
+        jComboBox6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox6ActionPerformed(evt);
             }
         });
 
@@ -129,14 +161,13 @@ public class mainFrame extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(195, 195, 195))
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 91, Short.MAX_VALUE)
-                        .addComponent(jButton3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jButton2)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
                             .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -151,9 +182,20 @@ public class mainFrame extends javax.swing.JFrame {
                             .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel9)
-                            .addComponent(jComboBox5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jComboBox5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(37, 37, 37)
+                                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel11)
+                            .addComponent(jComboBox6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton5))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -185,12 +227,23 @@ public class mainFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBox5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jComboBox5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel10))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel11)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jComboBox6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3)))
+                    .addComponent(jButton2))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         jLabel6.setText("Frase");
@@ -228,7 +281,7 @@ public class mainFrame extends javax.swing.JFrame {
                             .addComponent(jLabel6)
                             .addComponent(jLabel7))
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 326, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 295, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -236,6 +289,7 @@ public class mainFrame extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -243,8 +297,7 @@ public class mainFrame extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1))
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jScrollPane1)))
                 .addContainerGap())
         );
 
@@ -265,7 +318,7 @@ public class mainFrame extends javax.swing.JFrame {
         int numMutacion = Integer.parseInt(jTextField1.getText());
         int tipoReemplazo = jComboBox4.getSelectedIndex();
         String criterioFinalizacion = jComboBox5.getSelectedItem() + "";
-        
+        iteracion++;
         algoritmo = new Genetico(tamPoblacion, tamIndividuo, frase, numMutacion);
         //generamos la poblacion
         if(codificacion.equals("Letras"))
@@ -281,7 +334,9 @@ public class mainFrame extends javax.swing.JFrame {
         algoritmo.Emparejar();
         
         String val = algoritmo.mostrarPoblacion();
-        jTextArea1.setText(jTextArea1.getText() + "PADRES\n" + val);
+        jTextArea1.setText( "ITERACION\n" + iteracion + " \n\n");
+        jTextArea1.setText(jTextArea1.getText() + "PADRES--Fitness Total="  + algoritmo.fitnessTotal_ant + "\n" + val);
+        
         
         //seleccionamos tipo de padre
         if(seleccionPadres.equals("Tipo1"))
@@ -338,7 +393,17 @@ public class mainFrame extends javax.swing.JFrame {
         }
         
         val = algoritmo.mostrarPoblacion();
-        jTextArea1.setText(jTextArea1.getText() + "DESCENDIENTES\n" + val);
+        jTextArea1.setText(jTextArea1.getText() + "DESCENDIENTES--Fitness Total="  + algoritmo.fitnessTotal_sig + "\n" + val);
+        
+        jButton2.setEnabled(true);
+        jButton1.setEnabled(false);
+        
+        if(jComboBox6.getSelectedIndex() == 1)
+        {
+            String r = algoritmo.mostrar10mejores();
+            r = "ITERACION\n" + iteracion + " \n\n" + r;
+            jTextArea1.setText(r);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTextField3KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField3KeyTyped
@@ -395,13 +460,466 @@ public class mainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField2KeyTyped
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+        String codificacion = jComboBox1.getSelectedItem() + "";
+        int tamPoblacion = Integer.parseInt(jTextField3.getText());
+        String seleccionPadres = jComboBox2.getSelectedItem() + "";
+        int cruce = jComboBox3.getSelectedIndex();
+        int tamIndividuo = jTextField2.getText().trim().length();
+        String frase = jTextField2.getText().trim();
+        int numMutacion = Integer.parseInt(jTextField1.getText());
+        int tipoReemplazo = jComboBox4.getSelectedIndex();
+        String criterioFinalizacion = jComboBox5.getSelectedItem() + "";
+        iteracion++;
+        
+        algoritmo.prepararNuevaIteracion();
+        algoritmo.calcularFitness_ant();
+        algoritmo.calcularFitness_sig();
+        algoritmo.Emparejar();
+        
+        String val = algoritmo.mostrarPoblacion();
+        jTextArea1.setText("ITERACION\n" + iteracion + " \n\n");
+        jTextArea1.setText(jTextArea1.getText() + "PADRES--Fitness Total="  + algoritmo.fitnessTotal_ant + "\n" + val);
+            
+        //seleccionamos tipo de padre
+        if(seleccionPadres.equals("Tipo1"))
+        {
+            algoritmo.seleccionTipo1();
+        }
+        else
+        {
+            algoritmo.SeleccionTipo2();
+        }
+        algoritmo.calcularFitness_ant();
+        algoritmo.calcularFitness_sig();
+        
+        //val = algoritmo.mostrarPoblacion();
+        //jTextArea1.setText(jTextArea1.getText() + "SELECCION_TIPO1\n" +val);
+        
+        algoritmo.Emparejar();
+        algoritmo.calcularFitness_ant();
+        algoritmo.calcularFitness_sig();
+        //val = algoritmo.mostrarPoblacion();
+        //jTextArea1.setText( jTextArea1.getText() + "EMPAREJADA2\n" + val);
+        
+        //realización de cruce
+        if(cruce == 0)
+        {
+            algoritmo.cruce1X();
+        }
+        else
+        {
+            algoritmo.cruceMascarCruce();
+        }
+        algoritmo.calcularFitness_ant();
+        algoritmo.calcularFitness_sig();
+        //val = algoritmo.mostrarPoblacion();
+        //jTextArea1.setText(jTextArea1.getText() + "CRUCE1X\n" + val);
+        
+        algoritmo.mutar();
+        algoritmo.calcularFitness_ant();
+        algoritmo.calcularFitness_sig();
+        //val = algoritmo.mostrarPoblacion();
+        //jTextArea1.setText(jTextArea1.getText() + "MUTACION\n" + val);
+        
+        //calculamos fitness de las poblaciones
+        algoritmo.calcularFitness_ant();
+        algoritmo.calcularFitness_sig();
+        
+        if(tipoReemplazo == 0)
+        {
+            algoritmo.reemplazoEtilistaGeneral();
+        }
+        else
+        {
+            algoritmo.reemplazoAleatorio();
+        }
+        
+        val = algoritmo.mostrarPoblacion();
+        jTextArea1.setText(jTextArea1.getText() + "DESCENDIENTES--Fitness Total="  + algoritmo.fitnessTotal_sig + "\n" + val);
+        
+        if(jComboBox6.getSelectedIndex() == 1)
+        {
+            String r = algoritmo.mostrar10mejores();
+            r = "ITERACION\n" + iteracion + " \n\n" + r;
+            jTextArea1.setText(r);
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        iteracion = 0;
+        jTextArea1.setText("");
+        jButton2.setEnabled(false);
+        jButton1.setEnabled(true);
+    }//GEN-LAST:event_jButton4ActionPerformed
 
+    private void jComboBox5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox5ActionPerformed
+        if(jComboBox5.getSelectedIndex() == 0)
+        {
+            jLabel10.setText("%");
+            jTextField4.setEnabled(true);
+        }else if(jComboBox5.getSelectedIndex() == 1)
+        {
+            jLabel10.setText("");
+            jTextField4.setEnabled(true);
+        }
+        else
+        {
+            jLabel10.setText("");
+            jTextField4.setEnabled(false);
+        }
+    }//GEN-LAST:event_jComboBox5ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        
+        
+        int validacion = jComboBox5.getSelectedIndex();
+        
+        if(validacion == 0)
+        {
+            ejecutarConvergencia();
+        }
+        else if(validacion == 1)
+        {
+            ejecutarIteraciones();
+        }
+        else
+        {
+            ejecutarEncontrarSolucion();
+        }
+        
+        if(jComboBox6.getSelectedIndex() == 1)
+        {
+            String r = algoritmo.mostrar10mejores();
+            jTextArea1.setText(r);
+        }
+        
+        jButton2.setEnabled(true);
+        jButton1.setEnabled(false);
+        
+       
+       
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jComboBox6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox6ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox6ActionPerformed
+    
+    public void ejecutarEncontrarSolucion()
+    {
+        String codificacion = jComboBox1.getSelectedItem() + "";
+        int tamPoblacion = Integer.parseInt(jTextField3.getText());
+        String seleccionPadres = jComboBox2.getSelectedItem() + "";
+        int cruce = jComboBox3.getSelectedIndex();
+        int tamIndividuo = jTextField2.getText().trim().length();
+        String frase = jTextField2.getText().trim();
+        int numMutacion = Integer.parseInt(jTextField1.getText());
+        int tipoReemplazo = jComboBox4.getSelectedIndex();
+        String criterioFinalizacion = jComboBox5.getSelectedItem() + "";
+        iteracion++;
+        algoritmo = new Genetico(tamPoblacion, tamIndividuo, frase, numMutacion);
+        //double val_objetivo = 0.9*algoritmo.tamPoblacion*algoritmo.tamIndividuo*valor_field;
+        //generamos la poblacion
+        if(codificacion.equals("Letras"))
+        {
+            algoritmo.generarPoblacionLetras();
+        }
+        else
+        {
+            algoritmo.generarPoblacionAlfaNumerico();
+        }
+        algoritmo.calcularFitness_ant();
+        algoritmo.calcularFitness_sig();
+        
+        while (algoritmo.fitnessTotal_sig != 0) 
+        {
+            
+            
+            iteracion++;
+            algoritmo.prepararNuevaIteracion();
+            algoritmo.calcularFitness_ant();
+            algoritmo.calcularFitness_sig();
+            algoritmo.Emparejar();
+
+            String val = algoritmo.mostrarPoblacion();
+            jTextArea1.setText( "ITERACION\n" + iteracion + " \n\n");
+            jTextArea1.setText(jTextArea1.getText() + "PADRES--Fitness Total="  + algoritmo.fitnessTotal_ant + "\n" + val);
+
+
+            //seleccionamos tipo de padre
+            if(seleccionPadres.equals("Tipo1"))
+            {
+                algoritmo.seleccionTipo1();
+            }
+            else
+            {
+                algoritmo.SeleccionTipo2();
+            }
+            algoritmo.calcularFitness_ant();
+            algoritmo.calcularFitness_sig();
+
+            //val = algoritmo.mostrarPoblacion();
+            //jTextArea1.setText(jTextArea1.getText() + "SELECCION_TIPO1\n" +val);
+
+            algoritmo.Emparejar();
+            algoritmo.calcularFitness_ant();
+            algoritmo.calcularFitness_sig();
+            //val = algoritmo.mostrarPoblacion();
+            //jTextArea1.setText( jTextArea1.getText() + "EMPAREJADA2\n" + val);
+
+            //realización de cruce
+            if(cruce == 0)
+            {
+                algoritmo.cruce1X();
+            }
+            else
+            {
+                algoritmo.cruceMascarCruce();
+            }
+            algoritmo.calcularFitness_ant();
+            algoritmo.calcularFitness_sig();
+            //val = algoritmo.mostrarPoblacion();
+            //jTextArea1.setText(jTextArea1.getText() + "CRUCE1X\n" + val);
+
+            algoritmo.mutar();
+            
+            //val = algoritmo.mostrarPoblacion();
+            //jTextArea1.setText(jTextArea1.getText() + "MUTACION\n" + val);
+
+            
+
+            if(tipoReemplazo == 0)
+            {
+                algoritmo.reemplazoEtilistaGeneral();
+            }
+            else
+            {
+                algoritmo.reemplazoAleatorio();
+            }
+            
+            //calculamos fitness de las poblaciones
+            algoritmo.calcularFitness_ant();
+            algoritmo.calcularFitness_sig();
+            
+            val = algoritmo.mostrarPoblacion();
+            jTextArea1.setText(jTextArea1.getText() + "DESCENDIENTES--Fitness Total="  + algoritmo.fitnessTotal_sig + "\n" + val);
+            
+            
+        }
+    }
+    public void ejecutarConvergencia()
+    {
+        
+        double valor_convergencia = Double.parseDouble(jTextField4.getText()) / 100;
+        
+        System.out.println(valor_convergencia);
+        String codificacion = jComboBox1.getSelectedItem() + "";
+        int tamPoblacion = Integer.parseInt(jTextField3.getText());
+        String seleccionPadres = jComboBox2.getSelectedItem() + "";
+        int cruce = jComboBox3.getSelectedIndex();
+        int tamIndividuo = jTextField2.getText().trim().length();
+        String frase = jTextField2.getText().trim();
+        int numMutacion = Integer.parseInt(jTextField1.getText());
+        int tipoReemplazo = jComboBox4.getSelectedIndex();
+        String criterioFinalizacion = jComboBox5.getSelectedItem() + "";
+        iteracion++;
+        algoritmo = new Genetico(tamPoblacion, tamIndividuo, frase, numMutacion);
+        //double val_objetivo = 0.9*algoritmo.tamPoblacion*algoritmo.tamIndividuo*valor_field;
+        //generamos la poblacion
+        if(codificacion.equals("Letras"))
+        {
+            algoritmo.generarPoblacionLetras();
+        }
+        else
+        {
+            algoritmo.generarPoblacionAlfaNumerico();
+        }
+        
+        double porcentaje = 0;
+        while (valor_convergencia > porcentaje) 
+        {
+            
+            
+            iteracion++;
+            algoritmo.prepararNuevaIteracion();
+            algoritmo.calcularFitness_ant();
+            algoritmo.calcularFitness_sig();
+            algoritmo.Emparejar();
+
+            String val = algoritmo.mostrarPoblacion();
+            jTextArea1.setText( "ITERACION\n" + iteracion + " \n\n");
+            jTextArea1.setText(jTextArea1.getText() + "PADRES--Fitness Total="  + algoritmo.fitnessTotal_ant + "\n" + val);
+
+
+            //seleccionamos tipo de padre
+            if(seleccionPadres.equals("Tipo1"))
+            {
+                algoritmo.seleccionTipo1();
+            }
+            else
+            {
+                algoritmo.SeleccionTipo2();
+            }
+            algoritmo.calcularFitness_ant();
+            algoritmo.calcularFitness_sig();
+
+            //val = algoritmo.mostrarPoblacion();
+            //jTextArea1.setText(jTextArea1.getText() + "SELECCION_TIPO1\n" +val);
+
+            algoritmo.Emparejar();
+            algoritmo.calcularFitness_ant();
+            algoritmo.calcularFitness_sig();
+            //val = algoritmo.mostrarPoblacion();
+            //jTextArea1.setText( jTextArea1.getText() + "EMPAREJADA2\n" + val);
+
+            //realización de cruce
+            if(cruce == 0)
+            {
+                algoritmo.cruce1X();
+            }
+            else
+            {
+                algoritmo.cruceMascarCruce();
+            }
+            algoritmo.calcularFitness_ant();
+            algoritmo.calcularFitness_sig();
+            //val = algoritmo.mostrarPoblacion();
+            //jTextArea1.setText(jTextArea1.getText() + "CRUCE1X\n" + val);
+
+            algoritmo.mutar();
+            
+            //val = algoritmo.mostrarPoblacion();
+            //jTextArea1.setText(jTextArea1.getText() + "MUTACION\n" + val);
+
+            
+
+            if(tipoReemplazo == 0)
+            {
+                algoritmo.reemplazoEtilistaGeneral();
+            }
+            else
+            {
+                algoritmo.reemplazoAleatorio();
+            }
+            
+            //calculamos fitness de las poblaciones
+            algoritmo.calcularFitness_ant();
+            algoritmo.calcularFitness_sig();
+            
+            val = algoritmo.mostrarPoblacion();
+            jTextArea1.setText(jTextArea1.getText() + "DESCENDIENTES--Fitness Total="  + algoritmo.fitnessTotal_sig + "\n" + val);
+            
+            if(algoritmo.fitnessTotal_ant > algoritmo.fitnessTotal_sig)
+            {
+                porcentaje = (double)algoritmo.fitnessTotal_sig /(double)algoritmo.fitnessTotal_ant;
+            }
+            else if(algoritmo.fitnessTotal_ant < algoritmo.fitnessTotal_sig)
+            {
+                porcentaje = (double)algoritmo.fitnessTotal_ant /(double)algoritmo.fitnessTotal_sig;
+            }
+            else
+            {
+                porcentaje = 1;
+            }
+            
+            System.out.println(porcentaje);
+            System.out.println(algoritmo.fitnessTotal_ant);
+            System.out.println(algoritmo.fitnessTotal_sig);
+        }
+    }
+    public void ejecutarIteraciones()
+    {
+        int valor_field = Integer.parseInt(jTextField4.getText());
+        
+        String codificacion = jComboBox1.getSelectedItem() + "";
+        int tamPoblacion = Integer.parseInt(jTextField3.getText());
+        String seleccionPadres = jComboBox2.getSelectedItem() + "";
+        int cruce = jComboBox3.getSelectedIndex();
+        int tamIndividuo = jTextField2.getText().trim().length();
+        String frase = jTextField2.getText().trim();
+        int numMutacion = Integer.parseInt(jTextField1.getText());
+        int tipoReemplazo = jComboBox4.getSelectedIndex();
+        String criterioFinalizacion = jComboBox5.getSelectedItem() + "";
+        iteracion++;
+        algoritmo = new Genetico(tamPoblacion, tamIndividuo, frase, numMutacion);
+        //generamos la poblacion
+        if(codificacion.equals("Letras"))
+        {
+            algoritmo.generarPoblacionLetras();
+        }
+        else
+        {
+            algoritmo.generarPoblacionAlfaNumerico();
+        }
+        
+        for (int i = 0; i <= valor_field - 1; i++) 
+        {
+            iteracion++;
+            algoritmo.prepararNuevaIteracion();
+            algoritmo.calcularFitness_ant();
+            algoritmo.calcularFitness_sig();
+            algoritmo.Emparejar();
+
+            String val = algoritmo.mostrarPoblacion();
+            jTextArea1.setText( "ITERACION\n" + iteracion + " \n\n");
+            jTextArea1.setText(jTextArea1.getText() + "PADRES--Fitness Total="  + algoritmo.fitnessTotal_ant + "\n" + val);
+            
+
+            //seleccionamos tipo de padre
+            if(seleccionPadres.equals("Tipo1"))
+            {
+                algoritmo.seleccionTipo1();
+            }
+            else
+            {
+                algoritmo.SeleccionTipo2();
+            }
+            algoritmo.calcularFitness_ant();
+            algoritmo.calcularFitness_sig();
+
+            //val = algoritmo.mostrarPoblacion();
+            //jTextArea1.setText(jTextArea1.getText() + "SELECCION_TIPO1\n" +val);
+
+            algoritmo.Emparejar();
+            algoritmo.calcularFitness_ant();
+            algoritmo.calcularFitness_sig();
+            //val = algoritmo.mostrarPoblacion();
+            //jTextArea1.setText( jTextArea1.getText() + "EMPAREJADA2\n" + val);
+
+            //realización de cruce
+            if(cruce == 0)
+            {
+                algoritmo.cruce1X();
+            }
+            else
+            {
+                algoritmo.cruceMascarCruce();
+            }
+            algoritmo.calcularFitness_ant();
+            algoritmo.calcularFitness_sig();
+            //val = algoritmo.mostrarPoblacion();
+            //jTextArea1.setText(jTextArea1.getText() + "CRUCE1X\n" + val);
+
+            algoritmo.mutar();
+            
+
+            if(tipoReemplazo == 0)
+            {
+                algoritmo.reemplazoEtilistaGeneral();
+            }
+            else
+            {
+                algoritmo.reemplazoAleatorio();
+            }
+
+            //calculamos fitness de las poblaciones
+            algoritmo.calcularFitness_ant();
+            algoritmo.calcularFitness_sig();
+            
+            val = algoritmo.mostrarPoblacion();
+            jTextArea1.setText(jTextArea1.getText() + "DESCENDIENTES--Fitness Total="  + algoritmo.fitnessTotal_sig + "\n" + val);
+            
+        }
+    }
     /**
      * @param args the command line arguments
      */
@@ -440,13 +958,17 @@ public class mainFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JComboBox jComboBox2;
     private javax.swing.JComboBox jComboBox3;
     private javax.swing.JComboBox jComboBox4;
     private javax.swing.JComboBox jComboBox5;
+    private javax.swing.JComboBox jComboBox6;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -461,5 +983,6 @@ public class mainFrame extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField jTextField4;
     // End of variables declaration//GEN-END:variables
 }
