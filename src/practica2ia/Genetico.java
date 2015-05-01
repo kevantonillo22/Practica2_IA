@@ -472,18 +472,23 @@ public class Genetico {
         String resultado = "";
         String r1 = "";
         String r2 = "";
-        for (int i = 0; i <= 10 - 1; i++) 
-        {
-            String cadena1 = "";
-            String cadena2 = "";
-            
-            for (int j = 0; j <= tamIndividuo - 1; j++) 
+        try{
+            for (int i = 0; i <= 10 - 1; i++) 
             {
-                cadena1 = cadena1 + ((Individuo)copia_ant.get(i)).cadena.charAt(j) + ",";
-                cadena2 = cadena2 + ((Individuo)copia_sig.get(i)).cadena.charAt(j) + ",";
+                String cadena1 = "";
+                String cadena2 = "";
+
+                for (int j = 0; j <= tamIndividuo - 1; j++) 
+                {
+                    cadena1 = cadena1 + ((Individuo)copia_ant.get(i)).cadena.charAt(j) + ",";
+                    cadena2 = cadena2 + ((Individuo)copia_sig.get(i)).cadena.charAt(j) + ",";
+                }
+                 r1 = r1 + (i+1) +"-- "+ cadena1 + " -- " + "Fitness=" + ((Individuo)copia_ant.get(i)).fitness + "\n";
+                 r2 = r2 + (i+1) +"-- "+ cadena2 + " -- " + "Fitness=" + ((Individuo)copia_sig.get(i)).fitness + "\n";
             }
-             r1 = r1 + (i+1) +"-- "+ cadena1 + " -- " + "Fitness=" + ((Individuo)copia_ant.get(i)).fitness + "\n";
-             r2 = r2 + (i+1) +"-- "+ cadena2 + " -- " + "Fitness=" + ((Individuo)copia_sig.get(i)).fitness + "\n";
+        }
+        catch(Exception e)
+        {
         }
         resultado = "PADRES\n" + r1;
         resultado = resultado + "DESCENDIENTES\n" + r2;

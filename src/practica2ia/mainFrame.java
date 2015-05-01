@@ -101,6 +101,11 @@ public class mainFrame extends javax.swing.JFrame {
         jLabel8.setText("Tipo reemplazo");
 
         jTextField3.setText("10");
+        jTextField3.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTextField3FocusLost(evt);
+            }
+        });
         jTextField3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField3ActionPerformed(evt);
@@ -603,6 +608,16 @@ public class mainFrame extends javax.swing.JFrame {
     private void jComboBox6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox6ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox6ActionPerformed
+
+    private void jTextField3FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField3FocusLost
+        int v = Integer.parseInt(jTextField3.getText());
+        
+        if(v % 2 != 0)
+        {
+            v++;
+            jTextField3.setText(v + "");
+        }
+    }//GEN-LAST:event_jTextField3FocusLost
     
     public void ejecutarEncontrarSolucion()
     {
